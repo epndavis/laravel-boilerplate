@@ -10,7 +10,15 @@
     </head>
 
     <body>
-        @yield('content')
+        <div class="flex flex-col min-h-screen bg-gray-100 dark:bg-gray-900">
+            @include('partials.header')
+
+            <div class="flex flex-1">
+                @yield('content')
+            </div>
+
+            @include('partials.footer')
+        </div>
     </body>
 
     <script src="{{ mix('js/app.js') }}"></script>
