@@ -1,0 +1,29 @@
+version: "3.7"
+services: 
+    db:
+        image: mysql:8.0
+        container_name: mysql-server-80
+        restart: always
+        environment:
+            # MYSQL_USER="root", MYSQL_USER and MYSQL_PASSWORD are for configuring a regular user and cannot be used for the root user 
+          MYSQL_DATABASE: 'laravel_boilerplate'
+          MYSQL_ROOT_PASSWORD: 'password'
+        ports:
+          # <Port exposed> : < MySQL Port running inside container>
+          - '3306:3306'
+        expose:
+          # Opens port 3306 on the container
+          - '3306'
+          # Where our data will be persisted
+        working_dir: /application
+        volumes:
+        - .:/application
+    web:
+        build:
+            context: ./
+        container_name: php-8-apache
+        working_dir: /application
+        volumes:
+            - .:/application
+        ports:
+            - '8000:8000'
